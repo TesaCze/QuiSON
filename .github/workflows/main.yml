@@ -1,0 +1,30 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: 141.145.207.219
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            # Proceed with deployment
+            cd ~/GitProjects/QuiSON
+            git pull origin master
+            npm install
+            npm run build
+            rm -R /var/www/quison/*
+            cp -R ./dist/quison/browser/* /var/www/quison
