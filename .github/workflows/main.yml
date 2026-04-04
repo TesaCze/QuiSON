@@ -24,7 +24,8 @@ jobs:
             # Proceed with deployment
             cd ~/GitProjects/QuiSON
             git pull origin main
-            npm install
+            npm install --legacy-peer-deps
             npm run build
-            rm -R /var/www/quison/*
+            mkdir -p /var/www/quison
+            rm -fr /var/www/quison/*
             cp -R ./dist/quison/browser/* /var/www/quison
