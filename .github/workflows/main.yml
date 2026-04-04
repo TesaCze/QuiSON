@@ -26,6 +26,6 @@ jobs:
             git pull origin main
             npm install --legacy-peer-deps
             npm run build
-            mkdir -p /var/www/quison
-            rm -fr /var/www/quison/*
-            cp -R ./dist/quison/browser/* /var/www/quison
+            sudo mkdir -p /var/www/quison
+            sudo rm -fr /var/www/quison/*
+            sudo cp -R ./dist/quison/browser/* /var/www/quison
